@@ -42,7 +42,8 @@ public class DriveWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.driveArcade( Robot.oi.fancyStick );
+    	//Robot.driveBase.driveArcade( Robot.oi.fancyStick );
+    	Robot.driveBase.driveArcade( Robot.oi.fancyStick.getY(), Robot.oi.fancyStick.getZ() );
     }
 
     // Make this return true when this Command no longer needs to run execute()
