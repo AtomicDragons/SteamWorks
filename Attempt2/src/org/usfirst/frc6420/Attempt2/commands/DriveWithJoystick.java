@@ -13,9 +13,11 @@ package org.usfirst.frc6420.Attempt2.commands;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc6420.Attempt2.Robot;
 import org.usfirst.frc6420.Attempt2.RobotMap;
+import org.usfirst.frc6420.Attempt2.subsystems.DriveBase.Gear;
 
 /**
  *
@@ -46,12 +48,22 @@ public class DriveWithJoystick extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Robot.driveBase.driveArcade( Robot.oi.fancyStick );
-    	Robot.driveBase.driveArcade( Robot.oi.fancyStick.getY(), Robot.oi.fancyStick.getX() );
-    	if( Robot.oi.getFancyStick().getTrigger() ){
+    	double x = Robot.oi.fancyStick.getX();
+    	if( Math.abs( x ) < 0.25 ) {
+    		x = 0;
+    	}
+    	Robot.driveBase.driveArcade( Robot.oi.fancyStick.getY(), x );
+    	Robot.driveBase.shift( Robot.oi.getFancyStick().getTrigger() ? Gear.HIGH : Gear.LOW );
+    	/*if( Robot.oi.getFancyStick().getTrigger() ){
     		RobotMap.shift.set( DoubleSolenoid.Value.kReverse );
     	}else{
     		RobotMap.shift.set( DoubleSolenoid.Value.kForward );
-    	}
+    	}*/
+    	
+    	SmartDashboard.putString("DB/String 0", "" + RobotMap.rightDriveEncoder.getRate() );
+    	SmartDashboard.putString( "DB/String 1", Robot.driveBase.getShiftMode().toString() );
+    	SmartDashboard.putString( "DB/String 2", "" + RobotMap.gyro.getAngle() );
+    	SmartDashboard.putString( "DB/String 3", "" + RobotMap.ultrasonicSensor.getValue() );
     }
 
     // Make this return true when this Command no longer needs to run execute()
