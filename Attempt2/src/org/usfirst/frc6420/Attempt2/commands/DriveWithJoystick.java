@@ -10,8 +10,6 @@
 
 
 package org.usfirst.frc6420.Attempt2.commands;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -60,7 +58,7 @@ public class DriveWithJoystick extends Command {
     		RobotMap.shift.set( DoubleSolenoid.Value.kForward );
     	}*/
     	
-    	SmartDashboard.putString("DB/String 0", "" + RobotMap.rightDriveEncoder.getRate() );
+    	SmartDashboard.putString("DB/String 0", "" + RobotMap.a.get() );
     	SmartDashboard.putString( "DB/String 1", Robot.driveBase.getShiftMode().toString() );
     	SmartDashboard.putString( "DB/String 2", "" + RobotMap.gyro.getAngle() );
     	SmartDashboard.putString( "DB/String 3", "" + RobotMap.ultrasonicSensor.getValue() );
