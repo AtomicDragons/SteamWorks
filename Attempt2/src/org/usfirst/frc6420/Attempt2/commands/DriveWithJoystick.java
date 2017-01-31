@@ -58,10 +58,11 @@ public class DriveWithJoystick extends Command {
     		RobotMap.shift.set( DoubleSolenoid.Value.kForward );
     	}*/
     	
-    	SmartDashboard.putString("DB/String 0", "" + RobotMap.a.get() );
-    	SmartDashboard.putString( "DB/String 1", Robot.driveBase.getShiftMode().toString() );
+    	SmartDashboard.putString("DB/String 0", "" + RobotMap.rightDriveEncoder.get() );
+    	SmartDashboard.putString( "DB/String 1", "" + RobotMap.leftDriveEncoder.get() );
     	SmartDashboard.putString( "DB/String 2", "" + RobotMap.gyro.getAngle() );
     	SmartDashboard.putString( "DB/String 3", "" + RobotMap.ultrasonicSensor.getValue() );
+    	SmartDashboard.putString("DB/String 4", Robot.driveBase.getShiftMode().toString() );
     }
 
     // Make this return true when this Command no longer needs to run execute()
