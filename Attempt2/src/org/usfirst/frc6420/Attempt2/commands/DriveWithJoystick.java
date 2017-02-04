@@ -13,9 +13,9 @@ package org.usfirst.frc6420.Attempt2.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc6420.Attempt2.LVDash;
 import org.usfirst.frc6420.Attempt2.Robot;
 import org.usfirst.frc6420.Attempt2.RobotMap;
-import org.usfirst.frc6420.Attempt2.subsystems.DriveBase.Gear;
 
 /**
  *
@@ -47,22 +47,17 @@ public class DriveWithJoystick extends Command {
     protected void execute() {
     	//Robot.driveBase.driveArcade( Robot.oi.fancyStick );
     	double x = Robot.oi.fancyStick.getX();
-    	if( Math.abs( x ) < 0.25 ) {
+    	if( Math.abs( x ) < 0.1 ) {
     		x = 0;
     	}
-    	Robot.driveBase.driveArcade( Robot.oi.fancyStick.getY(), x );
-    	Robot.driveBase.shift( Robot.oi.getFancyStick().getTrigger() ? Gear.HIGH : Gear.LOW );
-    	/*if( Robot.oi.getFancyStick().getTrigger() ){
-    		RobotMap.shift.set( DoubleSolenoid.Value.kReverse );
-    	}else{
-    		RobotMap.shift.set( DoubleSolenoid.Value.kForward );
-    	}*/
-    	
-    	SmartDashboard.putString("DB/String 0", "" + RobotMap.rightDriveEncoder.get() );
+    	Robot.driveBase.driveArcade( Robot.oi.fancyStick.getY(), -x );
+    	//Robot.driveBase.shift( Robot.oi.getFancyStick().getTrigger() ? Gear.HIGH : Gear.LOW );
+    	SmartDashboard.putString( "DB/String 0", "" + RobotMap.rightDriveEncoder.get() );
     	SmartDashboard.putString( "DB/String 1", "" + RobotMap.leftDriveEncoder.get() );
     	SmartDashboard.putString( "DB/String 2", "" + RobotMap.gyro.getAngle() );
     	SmartDashboard.putString( "DB/String 3", "" + RobotMap.ultrasonicSensor.getValue() );
-    	SmartDashboard.putString("DB/String 4", Robot.driveBase.getShiftMode().toString() );
+    	SmartDashboard.putString( "DB/String 4", Robot.driveBase.getShiftMode().toString() );
+    	//LVDash.setString( 5, "" + RobotMap.imu.getAngle() );
     }
 
     // Make this return true when this Command no longer needs to run execute()
