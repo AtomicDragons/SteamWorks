@@ -57,6 +57,7 @@ public class DriveWithJoystick extends Command {
     	SmartDashboard.putString( "DB/String 2", "" + RobotMap.gyro.getAngle() );
     	SmartDashboard.putString( "DB/String 3", "" + RobotMap.ultrasonicSensor.getValue() );
     	SmartDashboard.putString( "DB/String 4", Robot.driveBase.getShiftMode().toString() );
+    	LVDash.setString( 7, String.valueOf( Robot.driveBase.getAverageEncoderCount() ) );
     	//LVDash.setString( 5, "" + RobotMap.imu.getAngle() );
     }
 

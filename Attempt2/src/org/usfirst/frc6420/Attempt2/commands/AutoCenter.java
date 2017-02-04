@@ -12,7 +12,7 @@ public class AutoCenter extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	addSequential( new AutoMove( 360 ) );
+    	addSequential( new AutoMove( 250 ) );
     	addSequential( new AutoTurn( 30 ) );
     	
 

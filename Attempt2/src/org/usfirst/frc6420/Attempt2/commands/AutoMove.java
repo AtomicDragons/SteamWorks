@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
 public class AutoMove extends PIDCommand {
 
     public AutoMove( int encoderCounts ) {
-    	super( 0.2, 0.0, 0.0 );
+    	super( 0.03, 0.0, 0.0 );
     	this.getPIDController().setPercentTolerance( 5.0 );
     	this.setSetpointRelative( encoderCounts );
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires( Robot.driveBase );
+    	//requires( Robot.driveBase );
     }
 
     // Called just before this Command runs the first time
@@ -30,7 +30,7 @@ public class AutoMove extends PIDCommand {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return this.getPIDController().onTarget();
     }
 
     // Called once after isFinished returns true
@@ -51,6 +51,6 @@ public class AutoMove extends PIDCommand {
 	@Override
 	protected void usePIDOutput(double output) {
 		// TODO Auto-generated method stub
-		Robot.driveBase.driveArcade( output, 0.0 );
+		Robot.driveBase.driveArcade( -output, 0.0 );
 	}
 }

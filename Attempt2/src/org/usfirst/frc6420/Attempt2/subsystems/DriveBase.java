@@ -67,7 +67,7 @@ public class DriveBase extends Subsystem {
     }
     
     public double getAverageEncoderCount(){
-    	return (rightEncoder.get() + leftEncoder.get()) * 0.5;
+    	return (rightEncoder.get() - leftEncoder.get()) * 0.5;
     }
 
     // Put methods for controlling this subsystem
