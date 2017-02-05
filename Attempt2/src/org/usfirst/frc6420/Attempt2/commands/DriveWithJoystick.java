@@ -52,11 +52,11 @@ public class DriveWithJoystick extends Command {
     	}
     	Robot.driveBase.driveArcade( Robot.oi.fancyStick.getY(), -x );
     	//Robot.driveBase.shift( Robot.oi.getFancyStick().getTrigger() ? Gear.HIGH : Gear.LOW );
-    	SmartDashboard.putString( "DB/String 0", "" + RobotMap.rightDriveEncoder.get() );
-    	SmartDashboard.putString( "DB/String 1", "" + RobotMap.leftDriveEncoder.get() );
-    	SmartDashboard.putString( "DB/String 2", "" + RobotMap.gyro.getAngle() );
-    	SmartDashboard.putString( "DB/String 3", "" + RobotMap.ultrasonicSensor.getValue() );
-    	SmartDashboard.putString( "DB/String 4", Robot.driveBase.getShiftMode().toString() );
+    	LVDash.setString( 0,  String.valueOf( RobotMap.rightDriveEncoder.get() ) );
+    	LVDash.setString( 1, String.valueOf( RobotMap.leftDriveEncoder.get() ) );
+    	LVDash.setString( 2, String.valueOf( RobotMap.gyro.getAngle() ) );
+    	LVDash.setString( 3, String.valueOf( RobotMap.ultrasonicSensor.getValue() ) );
+    	LVDash.setString( 4, Robot.driveBase.getShiftMode().toString());
     	LVDash.setString( 7, String.valueOf( Robot.driveBase.getAverageEncoderCount() ) );
     	//LVDash.setString( 5, "" + RobotMap.imu.getAngle() );
     }
