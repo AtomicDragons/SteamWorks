@@ -1,24 +1,20 @@
 package org.usfirst.frc6420.Attempt2.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
  */
-public class AutoCenter extends CommandGroup {
+public class AutoRight extends CommandGroup {
 
-    public AutoCenter() {
+    public AutoRight() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	addSequential( new AutoMove( 250 ) );
-    	System.out.println( "Stopped" );
-    	addSequential( new WaitCommand( 5 ) );
-    	System.out.println( "Moving Back" );
-    	addSequential( new AutoMove( -100 ) );
-
+    	addSequential( new AutoMove( 310 ) );
+    	addSequential( new AutoTurn( -60 ) );
+    	addSequential( new AutoMove( 150 ) );
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

@@ -46,7 +46,6 @@ public class RobotMap {
     public static AnalogInput ultrasonicSensor;
     public static DigitalInput a;
     public static PowerDistributionPanel pdp;
-    //public static ADIS16448_IMU imu;
     //public static UsbCamera cam0, cam1;
 
     public static void init() {
