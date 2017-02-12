@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 
 /**
@@ -80,7 +79,7 @@ public class DriveBase extends PIDSubsystem {
     }
     
     public double getAverageEncoderCount(){
-    	return (rightEncoder.get() - leftEncoder.get()) * 0.5;
+    	return (rightEncoder.get() + leftEncoder.get()) * 0.5;
     }
 
     // Put methods for controlling this subsystem
@@ -113,7 +112,7 @@ public class DriveBase extends PIDSubsystem {
 	@Override
 	protected double returnPIDInput() {
 		// return the difference in encoder counts from right to left (left will be negative)
-		return rightEncoder.get() + leftEncoder.get();
+		return rightEncoder.get() - leftEncoder.get();
 	}
 
 	@Override

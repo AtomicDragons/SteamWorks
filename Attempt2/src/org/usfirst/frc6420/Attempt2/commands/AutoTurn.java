@@ -12,8 +12,10 @@
 package org.usfirst.frc6420.Attempt2.commands;
 import org.usfirst.frc6420.Attempt2.Robot;
 import org.usfirst.frc6420.Attempt2.RobotMap;
+import org.usfirst.frc6420.Attempt2.subsystems.DriveBase;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  *
@@ -21,6 +23,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AutoTurn extends Command {
 	private int target;
 	private double absolute_target;
+	private Gyro gyro = RobotMap.gyro;
+	private DriveBase driveBase = Robot.driveBase;
 
     public AutoTurn( int target ) {
 		this.target = target;
@@ -36,25 +40,26 @@ public class AutoTurn extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	//this.getPIDController().setPercentTolerance( 5 );
-    	this.absolute_target = RobotMap.gyro.getAngle() + target;
+    	this.absolute_target = gyro.getAngle() + target;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if( target < 0 ){
-    		Robot.driveBase.driveArcade(0, 0.5 );
+    	if( absolute_target - gyro.getAngle() < 0 ){
+    		driveBase.driveArcade(0, 0.5 );
     	}else{
-    		Robot.driveBase.driveArcade( 0, -0.5 );
+    		driveBase.driveArcade( 0, -0.5 );
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Math.abs( RobotMap.gyro.getAngle() - this.absolute_target ) < 5;
+    	return Math.abs( gyro.getAngle() - this.absolute_target ) < 5;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	driveBase.driveArcade(0, 0);
     }
 
     // Called when another command which requires one or more of the same
