@@ -46,11 +46,11 @@ public class DriveWithJoystick extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Robot.driveBase.driveArcade( Robot.oi.fancyStick );
-    	double x = Robot.oi.fancyStick.getX();
+    	double x = Robot.oi.operatorJoystick.getX();
     	if( Math.abs( x ) < 0.1 ) {
     		x = 0;
     	}
-    	Robot.driveBase.driveArcade( Robot.oi.fancyStick.getY(), -x );
+    	Robot.driveBase.driveArcade( Robot.oi.operatorJoystick.getY(), -x );
     	//Robot.driveBase.shift( Robot.oi.getFancyStick().getTrigger() ? Gear.HIGH : Gear.LOW );
     	LVDash.setString( 0, String.valueOf( RobotMap.rightDriveEncoder.get() ) );
     	LVDash.setString( 1, String.valueOf( RobotMap.leftDriveEncoder.get() ) );
