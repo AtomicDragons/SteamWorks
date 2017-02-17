@@ -1,7 +1,7 @@
 package org.usfirst.frc6420.Attempt2.commands;
 
 import org.usfirst.frc6420.Attempt2.Robot;
-import org.usfirst.frc6420.Attempt2.subsystems.DriveBase.Gear;
+import org.usfirst.frc6420.Attempt2.subsystems.Shifter.Gear;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
@@ -21,7 +21,7 @@ public class ShiftCommand extends InstantCommand {
 
     // Called once when the command executes
     protected void initialize() {
-    	Robot.driveBase.shift( target );
+    	Robot.shifter.shift( target );
     }
 
 }

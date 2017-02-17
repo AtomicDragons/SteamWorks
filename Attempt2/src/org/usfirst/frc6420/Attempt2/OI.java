@@ -12,7 +12,7 @@
 package org.usfirst.frc6420.Attempt2;
 
 import org.usfirst.frc6420.Attempt2.commands.*;
-import org.usfirst.frc6420.Attempt2.subsystems.DriveBase.Gear;
+import org.usfirst.frc6420.Attempt2.subsystems.Shifter.Gear;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -66,9 +66,11 @@ public class OI {
         shiftButton.whenPressed( new ShiftCommand( Gear.HIGH ) );
         shiftButton.whenReleased( new ShiftCommand( Gear.LOW ) );
         Button cameraButton = new JoystickButton( operatorJoystick, 2 );
-        cameraButton.whenPressed( new CameraCommand() );
+        cameraButton.whenPressed( new CameraCommand( false ) );
         Button gearButton = new JoystickButton( operatorJoystick, 3 );
         gearButton.toggleWhenPressed( new DropGear() );
+        Button debugButton = new JoystickButton( operatorJoystick, 11 );
+        debugButton.whenPressed( new CameraCommand( true ) );
 
 
         // SmartDashboard Buttons

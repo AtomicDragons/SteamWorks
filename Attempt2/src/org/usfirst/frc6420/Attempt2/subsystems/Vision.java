@@ -1,11 +1,13 @@
 package org.usfirst.frc6420.Attempt2.subsystems;
 
 import org.opencv.core.Mat;
+import org.usfirst.frc6420.Attempt2.RobotMap;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -16,6 +18,7 @@ public class Vision extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	public static UsbCamera cam0, cam1;
+	private Solenoid visionLEDs = RobotMap.visionLEDs;
 	private volatile boolean cam0enabled = true;
 	
 	public Vision() {
@@ -59,6 +62,17 @@ public class Vision extends Subsystem {
 	
 	public void toggleCamera(){
 		cam0enabled = !cam0enabled;
+	}
+	
+	public void setForRobot(){
+		cam0enabled = true;
+		cam0.setExposureManual( 15 );
+		visionLEDs.set( true );
+	}
+	
+	public void setForHuman(){
+		cam0.setExposureAuto();
+		visionLEDs.set( false );
 	}
 
     public void initDefaultCommand() {
