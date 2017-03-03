@@ -1,5 +1,6 @@
 package org.usfirst.frc6420.Attempt2.subsystems;
 
+import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.usfirst.frc6420.Attempt2.RobotMap;
 
@@ -48,6 +49,7 @@ public class Vision extends Subsystem {
             		cvSink0.setEnabled( true );
             		cvSink1.setEnabled( false );
             		cvSink0.grabFrame( image );
+            		//Core.flip( image, image, -1 );
             	}else{
             		cvSink1.setEnabled( true );
             		cvSink0.setEnabled( false );

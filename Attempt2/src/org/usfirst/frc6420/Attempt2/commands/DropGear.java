@@ -20,7 +20,7 @@ public class DropGear extends TimedCommand {
 	}
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.gearDrop.open();
+    	Robot.gearage.open();
     }
 
 	@Override
@@ -30,6 +30,6 @@ public class DropGear extends TimedCommand {
 	
 	@Override
 	protected void end(){
-		Robot.gearDrop.close();
+		Robot.gearage.close();
 	}
 }
