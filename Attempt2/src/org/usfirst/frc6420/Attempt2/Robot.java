@@ -32,7 +32,7 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
 
     public static OI oi;
-    public static Vision vision;
+    //public static Vision vision;
     public static LVDash lvdash;
     public static Gearage gearage;
     public static Shifter shifter;
@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
     	RobotMap.init();
-    	vision = new Vision();
+    	//vision = new Vision();
     	gearage = new Gearage();
     	shifter = new Shifter();
     	climber = new Climb();

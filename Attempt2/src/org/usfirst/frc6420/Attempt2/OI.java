@@ -66,11 +66,11 @@ public class OI {
         shiftButton.whenPressed( new ShiftCommand( Gear.HIGH ) );
         shiftButton.whenReleased( new ShiftCommand( Gear.LOW ) );
         Button cameraButton = new JoystickButton( operatorJoystick, 2 );
-        cameraButton.whenPressed( new CameraCommand( false ) );
+        //cameraButton.whenPressed( new CameraCommand( false ) );
         Button gearButton = new JoystickButton( operatorJoystick, 3 );
         gearButton.toggleWhenPressed( new DropGear() );
         Button debugButton = new JoystickButton( operatorJoystick, 11 );
-        debugButton.whenPressed( new CameraCommand( true ) );
+        //debugButton.whenPressed( new CameraCommand( true ) );
 
 
         // SmartDashboard Buttons
