@@ -1,6 +1,6 @@
 package org.usfirst.frc6420.Attempt2.subsystems;
 
-import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -8,13 +8,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class RIODuino extends Subsystem {
 	
-	private SPI spi = new SPI( SPI.Port.kMXP );
+	private SerialPort spi = new SerialPort(9600, SerialPort.Port.kMXP );
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
+	/*
+	 * Send a numeric value to the rio
+	 */
 	public void setMode( Mode mode ){
-		byte[] dataReceived = null;
-		spi.transaction(new byte[mode.ordinal()], dataReceived, 1);
+		spi.writeString( "" + (char)mode.ordinal() );
 	}
 
     public void initDefaultCommand() {
@@ -22,16 +24,16 @@ public class RIODuino extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    enum Mode{
+    public enum Mode{
     	PULSE_RED,
-    	PULSE_BLUE,
     	PULSE_GREEN,
+    	PULSE_BLUE,
     	SOLID_RED,
-    	SOLID_BLUE,
     	SOLID_GREEN,
+    	SOLID_BLUE,
     	MOVING_RED,
+    	MOVING_GREEN,
     	MOVING_BLUE,
-    	MOVING_GREEN;
     }
 }
 

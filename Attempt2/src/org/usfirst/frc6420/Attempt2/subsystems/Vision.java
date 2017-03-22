@@ -1,15 +1,13 @@
 package org.usfirst.frc6420.Attempt2.subsystems;
 
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
 import org.usfirst.frc6420.Attempt2.RobotMap;
 
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.tables.ITable;
 
 /**
  *
@@ -18,63 +16,28 @@ public class Vision extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	public static UsbCamera cam0, cam1;
+	public static UsbCamera cam0;
 	private Solenoid visionLEDs = RobotMap.visionLEDs;
-	private volatile boolean cam0enabled = true;
+	private NetworkTable table;
+	private double[] defaultPoint = new double[]{0,0};
 	
 	public Vision() {
-		cam0 = new UsbCamera( "Front Facing Cam", 0 ); //CameraServer.getInstance().startAutomaticCapture( "Front Facing Cam", 0 );
-        cam0.setResolution( 320, 240 );
-        cam0.setFPS( 20 );
-        //cam0.setExposureManual( 15 );
-        
-        cam1 = new UsbCamera( "Rear Facing Cam", 1 );//CameraServer.getInstance().startAutomaticCapture( "Rear Facing Cam", 1 );
-        cam1.setResolution( 320, 240 );
-        cam1.setFPS( 20 );
-        
-        
-		Thread t = new Thread(() -> {
-            CvSink cvSink0 = CameraServer.getInstance().getVideo( cam0 );
-            cvSink0.setEnabled( true );
-            CvSink cvSink1 = CameraServer.getInstance().getVideo( cam1 );
-            cvSink1.setEnabled( true );
-            
-            CvSource outputStream = CameraServer.getInstance().putVideo("Switcher", 320, 240);
-            outputStream.setFPS( 20 );
-            
-            Mat image = new Mat();
-            
-            while(!Thread.interrupted()) {
-            	if( cam0enabled /*Robot.oi.fancyStick.getRawButton( 2 )*/ ){
-            		cvSink0.setEnabled( true );
-            		cvSink1.setEnabled( false );
-            		cvSink0.grabFrame( image );
-            		//Core.flip( image, image, -1 );
-            	}else{
-            		cvSink1.setEnabled( true );
-            		cvSink0.setEnabled( false );
-            		cvSink1.grabFrame( image );
-            	}
-            	
-            	outputStream.putFrame( image );
-            }
-		});
-		t.start();
+		cam0 = CameraServer.getInstance().startAutomaticCapture( 0 );
+		table = NetworkTable.getTable("pivision");
+		cam0.setFPS(30);
+		cam0.setResolution(640, 480);
 	}
 	
-	public void toggleCamera(){
-		cam0enabled = !cam0enabled;
+	public void setLEDs( boolean enabled ){
+		visionLEDs.set( enabled );
 	}
 	
-	public void setForRobot(){
-		cam0enabled = true;
-		cam0.setExposureManual( 15 );
-		visionLEDs.set( true );
-	}
-	
-	public void setForHuman(){
-		cam0.setExposureAuto();
-		visionLEDs.set( false );
+	public int getDegreesFromTarget(){
+		ITable a = table.getSubTable( "0" );
+		ITable b = table.getSubTable( "1" );
+		double[] point = a.getNumberArray("point", defaultPoint);
+		
+		return 0;
 	}
 
     public void initDefaultCommand() {

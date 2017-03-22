@@ -8,23 +8,14 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
  *
  */
 public class CameraCommand extends InstantCommand {
-	private boolean debug = false;
-    public CameraCommand( boolean debugging ) {
-        super();
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-        debug = debugging;
-        //requires( Robot.vision );
+	private boolean enable;
+    public CameraCommand( boolean enabled ) {
+    	enable = enabled;
     }
 
     // Called once when the command executes
     protected void initialize() {
-    	/*if( debug ){
-    		Robot.vision.setForRobot();
-    	}else{
-    		Robot.vision.toggleCamera();
-    	}
-    	*/
+    	Robot.vision.setLEDs( enable );
     }
 
 }
