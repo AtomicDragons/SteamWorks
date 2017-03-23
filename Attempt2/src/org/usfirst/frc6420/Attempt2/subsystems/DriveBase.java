@@ -89,7 +89,7 @@ public class DriveBase extends PIDSubsystem {
 	@Override
 	protected void usePIDOutput(double output) {
 		// TODO Auto-generated method stub
-		offset = output;
+		//offset = output;
 	}
 }
 
