@@ -28,10 +28,11 @@ public class AutoMove extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	LVDash.setString( 7, String.valueOf( driveBase.getAverageEncoderCount() ) );
+    	double dist = driveBase.getAverageEncoderCount() - this.absolute_target;
     	if( target > 0 ){
-    		driveBase.driveArcade( -0.5, 0 );
+    		driveBase.driveArcade( dist < 360 ? -0.5 : -0.75, 0 );
     	}else{
-    		driveBase.driveArcade( 0.5, 0 );
+    		driveBase.driveArcade( dist < 360? 0.5 : 0.75, 0 );
     	}
     }
 

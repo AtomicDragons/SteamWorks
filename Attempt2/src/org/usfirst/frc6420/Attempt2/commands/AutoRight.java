@@ -1,6 +1,7 @@
 package org.usfirst.frc6420.Attempt2.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -12,9 +13,12 @@ public class AutoRight extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	addSequential( new AutoMove( 310 ) );
+    	addSequential( new AutoMove( 500 ) );
     	addSequential( new AutoTurn( -60 ) );
-    	addSequential( new AutoMove( 150 ) );
+    	addSequential( new AutoMove( 110 ) );
+    	addSequential( new WaitCommand( 1 ) );
+    	addParallel( new DropGear( 2 )  );
+    	addSequential( new AutoMove( -100 ) );
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

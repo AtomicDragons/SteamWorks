@@ -59,12 +59,16 @@ public class DriveWithJoystick extends Command {
     	LVDash.setString( 2, String.valueOf( RobotMap.gyro.getAngle() ) );
     	LVDash.setString( 3, String.valueOf( RobotMap.ultrasonicSensor.getValue() ) );
     	LVDash.setString( 4, Robot.shifter.getShiftMode().toString());
-    	LVDash.setString( 7, String.valueOf( Robot.driveBase.getAverageEncoderCount() ) );
+    	LVDash.setString( 5, String.valueOf( RobotMap.dio5.get() ) );
+    	LVDash.setString( 6, String.valueOf( RobotMap.dio6.get() ) );
+    	LVDash.setString( 7, String.valueOf( RobotMap.dio7.get() ) );
+    	LVDash.setString( 8, String.valueOf( Robot.driveBase.getAverageEncoderCount() ) );
     	//LVDash.setString( 5, "" + RobotMap.imu.getAngle() );
     	double climb = Robot.oi.operatorJoystick.getAxis( AxisType.kThrottle );
-    	if( Math.abs( climb ) < 0.5 ){
+    	/*if( Math.abs( climb ) < 0.1 ){
     		climb = 0;
     	}
+    	*/
     	Robot.climber.setPower( climb );
     }
 

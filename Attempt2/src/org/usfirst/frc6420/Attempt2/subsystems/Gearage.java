@@ -16,11 +16,11 @@ public class Gearage extends Subsystem {
 	DoubleSolenoid gearDrop = RobotMap.gearDrop;
 	
 	public void open(){
-		gearDrop.set( Value.kForward );
+		gearDrop.set( Value.kReverse );
 	}
 	
 	public void close(){
-		gearDrop.set( Value.kReverse );
+		gearDrop.set( Value.kForward );
 	}
 
     public void initDefaultCommand() {

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.TimedCommand;
 public class AutoBaseline extends TimedCommand {
 
     public AutoBaseline() {
-    	super(1); //waits one second
+    	super(3.85 + 0.4); //waits one second
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,7 +21,7 @@ public class AutoBaseline extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.driveArcade(0.5, 0);
+    	Robot.driveBase.driveArcade(-0.5, 0);
     }
     // Called once after isFinished returns true
     protected void end() {

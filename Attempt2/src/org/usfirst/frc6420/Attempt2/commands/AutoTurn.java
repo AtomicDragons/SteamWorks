@@ -46,9 +46,9 @@ public class AutoTurn extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if( absolute_target - gyro.getAngle() < 0 ){
-    		driveBase.driveArcade(0, 0.5 );
+    		driveBase.driveArcade( 0, 0.6 );
     	}else{
-    		driveBase.driveArcade( 0, -0.5 );
+    		driveBase.driveArcade( 0, -0.6 );
     	}
     }
 

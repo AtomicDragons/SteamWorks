@@ -25,7 +25,7 @@ public class Vision extends Subsystem {
 		cam0 = CameraServer.getInstance().startAutomaticCapture( 0 );
 		table = NetworkTable.getTable("pivision");
 		cam0.setFPS(30);
-		cam0.setResolution(640, 480);
+		cam0.setResolution(320, 240);
 	}
 	
 	public void setLEDs( boolean enabled ){

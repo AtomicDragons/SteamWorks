@@ -13,11 +13,9 @@ public class AutoCenter extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	addSequential( new AutoMove( 250 ) );
-    	System.out.println( "Stopped" );
-    	addParallel( new DropGear( 5 ) );
+    	addSequential( new AutoMove( 400 ) );
     	addSequential( new WaitCommand( 1 ) );
-    	System.out.println( "Moving Back" );
+    	addParallel( new DropGear( 5 ) );
     	addSequential( new AutoMove( -100 ) );
 
         // To run multiple commands at the same time,

@@ -1,6 +1,7 @@
 package org.usfirst.frc6420.Attempt2.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -13,9 +14,12 @@ public class AutoLeft extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
     	
-    	addSequential( new AutoMove( 310 ) );
+    	addSequential( new AutoMove( 450 ) );
     	addSequential( new AutoTurn( 60 ) );
-    	addSequential( new AutoMove( 150 ) );
+    	addSequential( new AutoMove( 120 ) );
+    	addSequential( new WaitCommand( 1 ) );
+    	addParallel( new DropGear( 2 ) );
+    	addSequential( new AutoMove( -100 ) );
 
         // To run multiple commands at the same time,
         // use addParallel()
