@@ -11,11 +11,12 @@
 
 package org.usfirst.frc6420.Attempt2.subsystems;
 
+
 import org.usfirst.frc6420.Attempt2.RobotMap;
 import org.usfirst.frc6420.Attempt2.commands.*;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -43,6 +44,10 @@ public class DriveBase extends PIDSubsystem {
     private final Encoder leftEncoder = RobotMap.leftDriveEncoder;
     private final Encoder rightEncoder = RobotMap.rightDriveEncoder;
     private double offset;
+    private final AnalogInput us = RobotMap.ultrasonicSensor;
+    private final int[] values = new int[5];
+    private double movementPower = 0;
+    private final double powerIncrement = 0.1;
     
     public DriveBase(){
     	super( 0.1, 0, 0 );
@@ -50,12 +55,37 @@ public class DriveBase extends PIDSubsystem {
     }
     
     public void driveArcade( double movementValue, double turnValue ){
-    	if( turnValue == 0 ){
-    		driveBaseController.arcadeDrive( movementValue, offset );
+    	double diff = Math.abs( Math.abs( movementValue ) - Math.abs( movementPower ) );
+    	if( diff < powerIncrement ){
+    		movementPower = movementValue;
+    	}else{
+    		if( movementPower > movementValue ){
+    			movementPower -= powerIncrement;
+    		}else{
+    			movementPower += powerIncrement;
+    		}
+    	}
+    	if( Math.abs( turnValue ) < 0.1 ){
+    		driveBaseController.arcadeDrive( movementPower, offset );
     	}else{
     		this.setSetpoint( offset );
-    		driveBaseController.arcadeDrive( movementValue, turnValue );
+    		driveBaseController.arcadeDrive( movementPower, turnValue );
     	}
+    }
+    
+    public void driveArcadeAuto( double movementValue, double turnValue ){
+    	movementPower = movementValue;
+    	if( Math.abs( turnValue ) < 0.1 ){
+    		driveBaseController.arcadeDrive( movementPower, offset );
+    	}else{
+    		this.setSetpoint( offset );
+    		driveBaseController.arcadeDrive( movementPower, turnValue );
+    	}
+    }
+    
+    public void stop(){
+    	movementPower = 0;
+    	driveArcade( 0, 0 );
     }
  
     
@@ -90,6 +120,27 @@ public class DriveBase extends PIDSubsystem {
 	protected void usePIDOutput(double output) {
 		// TODO Auto-generated method stub
 		offset = output;
+	}
+	
+	public int getUltrasonicLevel(){
+		int[] filter = new int[5];
+		for( int i = 0; i < 4; i++ ){
+			values[i+1] = values[i];
+			filter[i+1] = values[i];
+		}
+		values[0] = us.getValue();
+		filter[0] = values[0];
+		//low pass
+		int lowIndex = 0;
+		for( int i = 1; i<5; i++ ){
+			if( values[ lowIndex ] > values[ i ] ){
+				lowIndex = i;
+			}
+		}
+		values[ lowIndex ] = 0;
+		int sum = 0;
+		for( int i : values ) sum+= i;
+		return sum / 4;
 	}
 }
 

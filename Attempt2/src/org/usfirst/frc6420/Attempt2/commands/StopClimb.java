@@ -2,17 +2,17 @@ package org.usfirst.frc6420.Attempt2.commands;
 
 import org.usfirst.frc6420.Attempt2.Robot;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class AutoBaseline extends TimedCommand {
+public class StopClimb extends Command {
 
-    public AutoBaseline() {
-    	super(4.25); //waits 4.25 seconds
+    public StopClimb() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires( Robot.climber );
     }
 
     // Called just before this Command runs the first time
@@ -21,11 +21,16 @@ public class AutoBaseline extends TimedCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.driveArcadeAuto(-0.5, 0);
+    	Robot.climber.setPower( 0.0 );
     }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return false;
+    }
+
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveBase.driveArcadeAuto(0, 0);
     }
 
     // Called when another command which requires one or more of the same

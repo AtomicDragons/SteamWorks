@@ -13,10 +13,14 @@ public class AutoMove extends Command {
 	private int target;
 	private double absolute_target;
 	private DriveBase driveBase = Robot.driveBase;
+	private double speed = 0.65;
 
     public AutoMove( int encoderCounts ) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+    	target = encoderCounts;
+    }
+    
+    public AutoMove( int encoderCounts, double speed ){
+    	this.speed = speed;
     	target = encoderCounts;
     }
 
@@ -27,12 +31,11 @@ public class AutoMove extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	LVDash.setString( 7, String.valueOf( driveBase.getAverageEncoderCount() ) );
-    	double dist = driveBase.getAverageEncoderCount() - this.absolute_target;
+    	LVDash.setString( 8, String.valueOf( driveBase.getAverageEncoderCount() ) );
     	if( target > 0 ){
-    		driveBase.driveArcade( dist < 360 ? -0.5 : -0.75, 0 );
+    		driveBase.driveArcadeAuto( -speed, 0 );
     	}else{
-    		driveBase.driveArcade( dist < 360? 0.5 : 0.75, 0 );
+    		driveBase.driveArcadeAuto( speed, 0 );
     	}
     }
 
@@ -43,7 +46,7 @@ public class AutoMove extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	driveBase.driveArcade(0, 0);
+    	driveBase.stop();
     }
 
     // Called when another command which requires one or more of the same

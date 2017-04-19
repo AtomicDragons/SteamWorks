@@ -13,9 +13,11 @@ public class AutoCenter extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	addSequential( new AutoMove( 400 ) );
+    	addSequential( new AutoMove( 400 ), 4.5 );
+    	
+    	addParallel( new DropGear( 2 ) );
     	addSequential( new WaitCommand( 1 ) );
-    	addParallel( new DropGear( 5 ) );
+
     	addSequential( new AutoMove( -100 ) );
 
         // To run multiple commands at the same time,

@@ -19,7 +19,7 @@ public class Selector {
 		Iterator<Map.Entry<DigitalInput, Command>> it = commands.entrySet().iterator();
 		while( it.hasNext() ){
 			Entry<DigitalInput, Command> pair = it.next();
-			if( (pair.getKey()).get() ){
+			if( !(pair.getKey()).get() ){
 				return pair.getValue();
 			}
 			it.remove();

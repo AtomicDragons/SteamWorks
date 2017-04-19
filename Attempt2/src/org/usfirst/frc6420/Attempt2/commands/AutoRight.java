@@ -13,12 +13,20 @@ public class AutoRight extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	addSequential( new AutoMove( 500 ) );
+    	addSequential( new AutoMove( 450, 0.8 ) );
+    	
     	addSequential( new AutoTurn( -60 ) );
-    	addSequential( new AutoMove( 110 ) );
-    	addSequential( new WaitCommand( 1 ) );
+    	
+    	addSequential( new AutoMove( 120 ), 3 );
+    	
     	addParallel( new DropGear( 2 )  );
+    	addSequential( new WaitCommand( 1 ) );
+    	
     	addSequential( new AutoMove( -100 ) );
+    	
+    	addSequential( new AutoTurn( 60 ) );
+    	
+    	addSequential( new AutoMove( 500 ) );
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

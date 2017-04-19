@@ -69,7 +69,7 @@ public class RobotMap {
               driveBaseRightA, driveBaseRightB);
         
         driveBaseDriveBaseController.setSafetyEnabled(true);
-        driveBaseDriveBaseController.setExpiration(0.1);
+        driveBaseDriveBaseController.setExpiration(0.5);
         driveBaseDriveBaseController.setSensitivity(0.5);
         driveBaseDriveBaseController.setMaxOutput(1.0);
         
