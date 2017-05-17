@@ -14,7 +14,7 @@ public class AutoLeft extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
     	
-    	addSequential( new AutoMove( 450, 0.8 ) );
+    	addSequential( new AutoMove( 440, 0.8 ) );
     	
     	addSequential( new AutoTurn( 60 ) );
     	

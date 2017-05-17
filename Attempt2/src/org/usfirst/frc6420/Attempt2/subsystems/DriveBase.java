@@ -47,7 +47,7 @@ public class DriveBase extends PIDSubsystem {
     private final AnalogInput us = RobotMap.ultrasonicSensor;
     private final int[] values = new int[5];
     private double movementPower = 0;
-    private final double powerIncrement = 0.1;
+    private final double powerIncrement = 0.05;
     
     public DriveBase(){
     	super( 0.1, 0, 0 );
@@ -56,6 +56,9 @@ public class DriveBase extends PIDSubsystem {
     
     public void driveArcade( double movementValue, double turnValue ){
     	double diff = Math.abs( Math.abs( movementValue ) - Math.abs( movementPower ) );
+    	if( Math.abs( movementValue ) < 0.05 ){
+    		movementValue = 0;
+    	}
     	if( diff < powerIncrement ){
     		movementPower = movementValue;
     	}else{

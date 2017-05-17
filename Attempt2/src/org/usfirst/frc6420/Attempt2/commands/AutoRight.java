@@ -13,9 +13,9 @@ public class AutoRight extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	addSequential( new AutoMove( 450, 0.8 ) );
+    	addSequential( new AutoMove( 440, 0.8 ) );
     	
-    	addSequential( new AutoTurn( -60 ) );
+    	addSequential( new AutoTurn( -55 ) );
     	
     	addSequential( new AutoMove( 120 ), 3 );
     	

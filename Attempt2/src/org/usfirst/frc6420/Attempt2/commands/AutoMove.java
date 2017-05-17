@@ -41,7 +41,11 @@ public class AutoMove extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Math.abs( driveBase.getAverageEncoderCount() - this.absolute_target ) < 10;
+    	if( target > 0 ){
+    		return driveBase.getAverageEncoderCount() > this.absolute_target - 15.4 * this.speed;
+    	}else{
+    		return driveBase.getAverageEncoderCount() < this.absolute_target + 15.4 * this.speed;
+    	}
     }
 
     // Called once after isFinished returns true

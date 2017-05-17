@@ -63,6 +63,7 @@ public class DriveWithJoystick extends Command {
     	LVDash.setString( 7, String.valueOf( RobotMap.dio7.get() ) );
     	LVDash.setString( 8, String.valueOf( Robot.driveBase.getAverageEncoderCount() ) );
     	double climb = Robot.oi.operatorJoystick.getAxis( AxisType.kThrottle );
+    	//climb = (-climb + 1) * 0.5;
     	if( Math.abs( climb ) < 0.25 ){
     		climb = 0;
     	}
