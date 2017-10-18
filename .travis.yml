@@ -1,6 +1,7 @@
 before_install:
-    - apt install eclipse
+    - sudo apt install eclipse
     - sudo eclipse -application org.eclipse.equinox.p2.director -repository http://first.wpi.edu/FRC/roborio/release/eclipse/ -installIU "file:/var/lib/jenkins/workspace/Eclipse Plugins/Eclipse Plugins - Release/edu.wpi.first.wpilib.plugins.updatesite/target/site/site.xml.edu.wpi.first.wpilib.plugins"
 language: java
 jdk:
   - oraclejdk8
+sudo: y
