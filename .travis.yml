@@ -1,7 +1,7 @@
 before_install:
     - cd /opt
-    - wget --output-document=eclipse.tar.gz http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/neon/3/eclipse-java-neon-3-linux-gtk-x86_64.tar.gz 
-    - sudo tar -xvf eclipse.tar.gz
+    - wget --output-document=eclipse.tar http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/neon/3/eclipse-java-neon-3-linux-gtk-x86_64.tar.gz 
+    - sudo tar -xvf eclipse.tar
     - sudo ln -s /opt/eclipse/eclipse
     - sudo eclipse -application org.eclipse.equinox.p2.director -repository http://first.wpi.edu/FRC/roborio/release/eclipse/ -installIU "file:/var/lib/jenkins/workspace/Eclipse Plugins/Eclipse Plugins - Release/edu.wpi.first.wpilib.plugins.updatesite/target/site/site.xml.edu.wpi.first.wpilib.plugins"
 language: java
